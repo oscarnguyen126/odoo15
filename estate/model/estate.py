@@ -1,3 +1,4 @@
+from email.policy import default
 from odoo import models, fields
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
@@ -18,7 +19,9 @@ class Estate(models.Model):
     garage = fields.Boolean()
     garden_area = fields.Integer(string="Garden square (sqrm)")
     garden_orientation = fields.Selection([{'north', 'North'}, {'south', 'South'}, {'east', 'East'}, {'west', 'West'}])
-    state = fields.Selection([
+    state = fields.Selection([{'new','New'},
                               {'offer received', 'Offer Received'},
                               {'offer accepted', 'Offer Accepted'},
-                              {'sold', 'Sold'}, {'canceled', 'Canceled'}], default='New', copy=False)
+                              {'sold', 'Sold'}, {'canceled', 'Canceled'}], default='new', copy=False)
+    property_type_id = fields.Many2one('estate.property.type', string="Type")
+    
