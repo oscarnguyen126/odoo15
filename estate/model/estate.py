@@ -1,5 +1,4 @@
-from email.policy import default
-from odoo import models, fields
+from odoo import models, fields, api
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
@@ -23,5 +22,14 @@ class Estate(models.Model):
                               {'offer received', 'Offer Received'},
                               {'offer accepted', 'Offer Accepted'},
                               {'sold', 'Sold'}, {'canceled', 'Canceled'}], default='new', copy=False)
-    property_type_id = fields.Many2one('estate.property.type', string="Type")
+    property_type_id = fields.Many2one('estate.property.type', string="Property type")
+    offer_ids= fields.Many2one('estate.property.offer')
+    buyer = fields.Many2one('res.partner', string='Buyer', copy=False)
+    salesperson = fields.Many2one('res.users', string='Salesperson', index=True, default=lambda self: self.env.user)
+    tag_ids = fields.Many2many('estate.property.tag')
+    total_area = fields.Float(string="Total area (sqrm)", compute="_compute_total")
     
+    @api.depends('total_area')
+    def _compute_total(self):
+        for record in self:
+            record.total_area = record.living_area + record.garden_area
