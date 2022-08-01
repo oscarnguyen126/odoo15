@@ -9,9 +9,11 @@
                     <form>
                         <group>
                             <field name="name"/>
+                            <field name="property_type_id"/>
                             <field name="date_availability"/>
                             <field name="expected_price"/>
                             <field name="selling_price"/>
+                            <field name="best_price"/>
                         </group>
                     </form>
                     <form>
@@ -24,10 +26,15 @@
                                         <field name="living_area"/>
                                         <field name="facades"/>
                                         <field name="garage"/>
+                                        <field name="garden"/>
                                         <field name="garden_area"/>
                                         <field name="garden_orientation"/>
                                         <field name="state"/>
-                                        <field name="property_type_id"/>
+                                        <field name="offer_ids"/>
+                                        <field name="buyer"/>
+                                        <field name="salesperson"/>
+                                        <field name="tag_ids" widget="many2many_tags"/>
+                                        <field name="total_area"/>
                                     </group>
                                 </page>
                             </notebook>

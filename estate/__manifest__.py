@@ -7,6 +7,8 @@
              'views/estate_property_views.xml',
              'views/estate_menus.xml',
              'views/type_menus.xml',
-             'views/type_menus_views.xml'],
+             'views/type_menus_views.xml',
+             'views/offer_views.xml',
+             'views/offer_menus.xml'],
     'license': 'GPL-3',
 }
