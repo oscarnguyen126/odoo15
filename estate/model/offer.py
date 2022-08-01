@@ -5,7 +5,7 @@ class Offer(models.Model):
     _name = "estate.property.offer"
     
     price = fields.Float()
-    status = fields.Selection([{'accepted', 'Accepted'}, {'refused', 'Refused'}], copy=False)
+    status = fields.Selection([('accepted', 'Accepted'), ('refused', 'Refused')], copy=False)
     partner_id = fields.Many2one('res.partner', required=True)
     property_id = fields.Many2one('estate.property', required=True)
     validity = fields.Integer(default=7, string="Validity (days)")
