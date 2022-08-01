@@ -30,11 +30,19 @@
                                         <field name="garden_area"/>
                                         <field name="garden_orientation"/>
                                         <field name="state"/>
-                                        <field name="offer_ids"/>
-                                        <field name="buyer"/>
-                                        <field name="salesperson"/>
                                         <field name="tag_ids" widget="many2many_tags"/>
                                         <field name="total_area"/>
+                                    </group>
+                                </page>
+                                <page string="Offer">
+                                    <group>
+                                        <field name="offer_ids"/>
+                                    </group>
+                                </page>
+                                 <page string="Other info">
+                                    <group>
+                                        <field name="salesperson"/>
+                                        <field name="buyer"/>
                                     </group>
                                 </page>
                             </notebook>
@@ -43,6 +51,7 @@
                 </form>
             </field>
         </record>
+
 
         <record id="view_estate_property_search" model="ir.ui.view">
             <field name="name">estate.property.search</field>
