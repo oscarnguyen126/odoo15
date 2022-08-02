@@ -8,6 +8,11 @@
                 <form>
                     <form>
                         <group>
+                            <header>
+                                <button type="object" name="sold_status_button" string="Sold"/>
+                                <button type="object" name="cancel_status_button" string="Cancel"/>
+                            </header>
+                            <field name="status"/>
                             <field name="name"/>
                             <field name="property_type_id"/>
                             <field name="date_availability"/>

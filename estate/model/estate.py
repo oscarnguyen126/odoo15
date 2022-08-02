@@ -2,19 +2,19 @@ from odoo import models, fields, api
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from odoo.exceptions import UserError
-from . import offer
 
 
 class Estate(models.Model):
     _name = "estate.property"
     _description = "Estate property"
 
+    status = fields.Char(string="Status")
     name = fields.Char(string='Title', required=True)
     description = fields.Char()
     date_availability = fields.Date(copy=False, default=datetime.now() + relativedelta(months=3))
     expected_price = fields.Float(string="Expected price ($)")
-    selling_price = fields.Float(string="Selling price ($)", copy=False)
-    best_price = fields.Float()
+    selling_price = fields.Float(string="Selling price ($)",readonly=True, copy=False)
+    best_price = fields.Float(string="Best offer")
     bedrooms = fields.Integer(string="Bedrooms", default=2)
     living_area = fields.Integer(string="Living square (sqrm)")
     facades = fields.Integer()
@@ -61,3 +61,23 @@ class Estate(models.Model):
         for record in self:
             record.total_area = record.living_area + record.garden_area
 
+
+    @api.depends('estate_property_offer.price')
+    def best_offer(self):
+        for record in self:
+            record.best_price = max(self.env['estate.property.offer'].search([]).mapped('price'))
+    
+    
+    def sold_status_button(self):
+        for record in self:
+            record.status = "Sold"
+        return record.status
+    
+    
+    def cancel_status_button(self):
+        for record in self:
+            record.status = "Cancelled"        
+        return record.status
+
+#add function for sold, cancel button
+#Get the best offer for best_price field
